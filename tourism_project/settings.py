@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-ptr6o4#5(pphxwj(4x=^k_x!xyn4qw8_9x)(c+tl+9f)b7#l*o"
 #한국관광공사 api 키
-KOREA_TOUR_API_KEY = "dNeku9S%2F21ZCjP5yrP3nKwrtnJUDORoRqP5quqd7TiiqN8%2B8jsSdT%2BMFp6I40J30euRBeJmDzJ1Qik74yqWH%2BQ%3D%3D"  # 본인의 API 키로 변경
+KOREA_TOUR_API_KEY = "jnz9NZ03+mJj1KG5TDz0Z/vjalhFbQONtQwRcvm2PxxLUoqUK0KyIz9XeBOtQMarEpK3tDHWHKGh9M2PdahVgg=="  # 본인의 API 키로 변경
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -57,7 +57,7 @@ ROOT_URLCONF = "tourism_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

@@ -1,0 +1,43 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>관광지 검색</title>
+    <script>
+        function searchTouristSpots() {
+            var keyword = document.getElementById("keyword").value;
+            fetch("/search?keyword=" + encodeURIComponent(keyword))
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById("results");
+                resultDiv.innerHTML = "";
+
+                if (data.length === 0) {
+                    resultDiv.innerHTML = "<p>검색 결과가 없습니다.</p>";
+                    return;
+                }
+
+                data.forEach(item => {
+                    var spot = document.createElement("div");
+                    spot.innerHTML = `
+                        <h3>${item.title}</h3>
+                        <p><strong>주소:</strong> ${item.addr1}</p>
+                        <img src="${item.firstimage}" alt="${item.title}" width="300">
+                        <p><a href="https://map.kakao.com/?q=${item.title}" target="_blank">지도에서 보기</a></p>
+                        <hr>
+                    `;
+                    resultDiv.appendChild(spot);
+                });
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</head>
+<body>
+    <h1>한국관광공사 API 키워드 검색</h1>
+    <input type="text" id="keyword" placeholder="검색어 입력">
+    <button onclick="searchTouristSpots()">검색</button>
+    <div id="results"></div>
+</body>
+</html>
